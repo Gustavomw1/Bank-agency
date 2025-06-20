@@ -7,16 +7,16 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pessoa {
 
+public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
 
-    @Column(unique = true)
-    private int cpf;
+    @Column(unique = true, length = 11)
+    private String cpf;
 
     private String nascimento;
 
