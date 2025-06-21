@@ -4,25 +4,44 @@ import com.bancario.demo.model.Pessoa;
 import com.bancario.demo.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/pessoas")
+@RequestMapping("/api/pessoas")
 public class PessoaController {
 
-    private final PessoaService pessoaService;
-
     @Autowired
-    public PessoaController(PessoaService pessoaService) {
-        this.pessoaService = pessoaService;
+    private PessoaService pessoaService;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody Pessoa pessoa) {
+        try {
+            if (pessoa.getPassword() == null || pessoa.getPassword().length() < 8) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A senha deve ter no mínimo 8 caracteres.");
+            }
+            Pessoa criada = pessoaService.register(pessoa);
+            return ResponseEntity.status(HttpStatus.CREATED).body(criada);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<Pessoa> criar(@RequestBody Pessoa pessoa) {
-        Pessoa salva = pessoaService.salvar(pessoa);
-        return ResponseEntity.ok(salva);
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Pessoa pessoa) {
+        try {
+            Pessoa logada = pessoaService.login(pessoa.getCpf(), pessoa.getPassword());
+            return ResponseEntity.ok(logada);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Pessoa>> listarTodos() {
+        return ResponseEntity.ok(pessoaService.listarTodos());
     }
 
     @GetMapping("/{id}")
@@ -32,14 +51,9 @@ public class PessoaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Pessoa>> listarTodos() {
-        return ResponseEntity.ok(pessoaService.listarTodos());
-    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<Pessoa> atualizar(@PathVariable Long id, @RequestBody Pessoa novaPessoa) {
-        return ResponseEntity.ok(pessoaService.atualizar(id, novaPessoa));
+    public ResponseEntity<Pessoa> atualizar(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+        return ResponseEntity.ok(pessoaService.atualizar(id, pessoa));
     }
 
     @DeleteMapping("/{id}")

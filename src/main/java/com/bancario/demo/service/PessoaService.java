@@ -11,37 +11,46 @@ import java.util.Optional;
 @Service
 public class PessoaService {
 
-    private final PessoaRepository pessoaRepository;
-
     @Autowired
-    public PessoaService(PessoaRepository pessoaRepository) {
-        this.pessoaRepository = pessoaRepository;
-    }
+    private PessoaRepository pessoaRepository;
 
-    public Pessoa salvar(Pessoa pessoa) {
+    public Pessoa register(Pessoa pessoa) {
+        Optional<Pessoa> existente = pessoaRepository.findByCpf(pessoa.getCpf());
+        if (existente.isPresent()) {
+            throw new RuntimeException("CPF já está em uso.");
+        }
         return pessoaRepository.save(pessoa);
     }
 
-    public Optional<Pessoa> buscarPorId(Long id) {
-        return pessoaRepository.findById(id);
+    public Pessoa login(String cpf, String password) {
+        Pessoa pessoa = pessoaRepository.findByCpf(cpf)
+                .orElseThrow(() -> new RuntimeException("CPF não encontrado"));
+
+        if (!pessoa.getPassword().equals(password)) {
+            throw new RuntimeException("Senha inválida.");
+        }
+        return pessoa;
     }
 
     public List<Pessoa> listarTodos() {
         return pessoaRepository.findAll();
     }
 
-    public void deletar(Long id) {
-        pessoaRepository.deleteById(id);
+    public Optional<Pessoa> buscarPorId(Long id) {
+        return pessoaRepository.findById(id);
     }
 
     public Pessoa atualizar(Long id, Pessoa novaPessoa) {
-        Pessoa pessoa = pessoaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+        return pessoaRepository.findById(id).map(p -> {
+            p.setNome(novaPessoa.getNome());
+            p.setCpf(novaPessoa.getCpf());
+            p.setNascimento(novaPessoa.getNascimento());
+            p.setPassword(novaPessoa.getPassword());
+            return pessoaRepository.save(p);
+        }).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
+    }
 
-        pessoa.setName(novaPessoa.getName());
-        pessoa.setCpf(novaPessoa.getCpf());
-        pessoa.setNascimento(novaPessoa.getNascimento());
-
-        return pessoaRepository.save(pessoa);
+    public void deletar(Long id) {
+        pessoaRepository.deleteById(id);
     }
 }
