@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/pessoas")
 public class PessoaController {
 
-    @Autowired
+    @Autowired // Injeta automaticamente dependências
     private PessoaService pessoaService;
 
     @PostMapping("/register")
