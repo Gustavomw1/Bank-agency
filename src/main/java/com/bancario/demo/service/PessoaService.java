@@ -12,27 +12,21 @@ import java.util.Optional;
 @Service
 public class PessoaService {
 
-    @Autowired // Injeta automaticamente dependências
+    @Autowired
     private PessoaRepository pessoaRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder encoder;
 
     public Pessoa register(Pessoa pessoa) {
-        Optional<Pessoa> existente = pessoaRepository.findByCpf(pessoa.getCpf());
-        if (existente.isPresent()) {
-            throw new RuntimeException("CPF já está em uso.");
-        }
-        pessoa.setPassword(passwordEncoder.encode(pessoa.getPassword()));
+        pessoa.setPassword(encoder.encode(pessoa.getPassword()));
         return pessoaRepository.save(pessoa);
     }
 
-    public Pessoa login(String cpf, String password) {
-        Pessoa pessoa = pessoaRepository.findByCpf(cpf)
-                .orElseThrow(() -> new RuntimeException("CPF não encontrado"));
-
-        if (!passwordEncoder.matches(password, pessoa.getPassword())) {
-            throw new RuntimeException("Senha inválida.");
+    public Pessoa login(String cpf, String rawPassword) {
+        Pessoa pessoa = pessoaRepository.findByCpf(cpf);
+        if (pessoa == null || !encoder.matches(rawPassword, pessoa.getPassword())) {
+            throw new RuntimeException("CPF ou senha inválidos");
         }
         return pessoa;
     }
@@ -46,13 +40,11 @@ public class PessoaService {
     }
 
     public Pessoa atualizar(Long id, Pessoa novaPessoa) {
-        return pessoaRepository.findById(id).map(p -> {
-            p.setNome(novaPessoa.getNome());
-            p.setCpf(novaPessoa.getCpf());
-            p.setNascimento(novaPessoa.getNascimento());
-            p.setPassword(passwordEncoder.encode(novaPessoa.getPassword()));
-            return pessoaRepository.save(p);
-        }).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
+        Pessoa atual = pessoaRepository.findById(id).orElseThrow();
+        atual.setNome(novaPessoa.getNome());
+        atual.setNascimento(novaPessoa.getNascimento());
+        atual.setPassword(encoder.encode(novaPessoa.getPassword()));
+        return pessoaRepository.save(atual);
     }
 
     public void deletar(Long id) {

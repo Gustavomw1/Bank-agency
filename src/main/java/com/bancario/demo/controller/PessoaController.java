@@ -1,6 +1,8 @@
 package com.bancario.demo.controller;
 
+import com.bancario.demo.model.AuthResponse;
 import com.bancario.demo.model.Pessoa;
+import com.bancario.demo.security.JwtUtil;
 import com.bancario.demo.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +15,11 @@ import java.util.List;
 @RequestMapping("/api/pessoas")
 public class PessoaController {
 
-    @Autowired // Injeta automaticamente dependências
+    @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Pessoa pessoa) {
@@ -33,7 +38,10 @@ public class PessoaController {
     public ResponseEntity<?> login(@RequestBody Pessoa pessoa) {
         try {
             Pessoa logada = pessoaService.login(pessoa.getCpf(), pessoa.getPassword());
-            return ResponseEntity.ok(logada);
+
+            String token = jwtUtil.generateToken(logada.getCpf());
+
+            return ResponseEntity.ok(new AuthResponse(token));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }

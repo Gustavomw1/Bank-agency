@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data // Gera getters,setters, toString, hashCode e equals
-@NoArgsConstructor // Gera construtor sem argumentos
-@AllArgsConstructor // Gera todos os atributos como parâmetros
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pessoa {
 
     @Id
