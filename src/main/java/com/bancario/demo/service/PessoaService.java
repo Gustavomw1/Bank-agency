@@ -1,6 +1,8 @@
 package com.bancario.demo.service;
 
+import com.bancario.demo.model.Conta;
 import com.bancario.demo.model.Pessoa;
+import com.bancario.demo.repository.ContaRepository;
 import com.bancario.demo.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,11 +18,18 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     @Autowired
+    private ContaRepository contaRepository;
+
+    @Autowired
     private BCryptPasswordEncoder encoder;
 
     public Pessoa register(Pessoa pessoa) {
         pessoa.setPassword(encoder.encode(pessoa.getPassword()));
-        return pessoaRepository.save(pessoa);
+        Pessoa criada = pessoaRepository.save(pessoa);
+
+        contaRepository.save(new Conta(criada));
+
+        return criada;
     }
 
     public Pessoa login(String cpf, String rawPassword) {
