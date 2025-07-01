@@ -113,4 +113,18 @@ async function transferir() {
     }
 }
 
+async function mostrarUsuario() {
+    try {
+        const res = await authFetch('http://localhost:8080/api/pessoas');
+        const pessoas = await res.json();
+        const pessoa = pessoas.find(p => p.cpf === cpf);
+        if (pessoa) {
+            document.getElementById('user-info').textContent = `ID: ${pessoa.id} | Nome: ${pessoa.nome}`;
+        }
+    } catch (err) {
+        console.error('Erro ao exibir dados do usuário:', err);
+    }
+}
+
 carregarDashboard();
+mostrarUsuario();
