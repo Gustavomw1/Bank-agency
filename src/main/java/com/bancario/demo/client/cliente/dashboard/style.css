@@ -66,6 +66,21 @@ input[type="number"]:focus {
     border-color: #000;
 }
 
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #000;
+}
+
 button {
     width: 100%;
     padding: 12px;

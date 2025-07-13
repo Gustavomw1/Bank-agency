@@ -58,6 +58,17 @@ public class ContaService {
         transacaoRepository.save(new Transacao("SAQUE", valor, conta, null));
     }
 
+    public void transferirPorCpf(String origemCpf, String destinoCpf, BigDecimal valor) {
+        Pessoa origem = pessoaRepository.findByCpf(origemCpf);
+        Pessoa destino = pessoaRepository.findByCpf(destinoCpf);
+
+        if (origem == null || destino == null) {
+            throw new RuntimeException("CPF de origem ou destino inválido.");
+        }
+
+        transferir(origem.getId(), destino.getId(), valor);
+    }
+
     public void transferir(Long origemPessoaId, Long destinoPessoaId, BigDecimal valor) {
         Conta origem = buscarContaPorPessoaId(origemPessoaId);
         Conta destino = buscarContaPorPessoaId(destinoPessoaId);

@@ -55,13 +55,13 @@ public class ContaController {
         }
     }
 
-    @PostMapping("/{idPessoa}/transferir")
-    public ResponseEntity<?> transferir(
-            @PathVariable Long idPessoa,
-            @RequestParam Long destinoId,
+    @PostMapping("/transferir")
+    public ResponseEntity<?> transferirPorCpf(
+            @RequestParam String origemCpf,
+            @RequestParam String destinoCpf,
             @RequestParam BigDecimal valor) {
         try {
-            contaService.transferir(idPessoa, destinoId, valor);
+            contaService.transferirPorCpf(origemCpf, destinoCpf, valor);
             return ResponseEntity.ok("Transferência realizada");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

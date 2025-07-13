@@ -96,14 +96,23 @@ async function sacar() {
 }
 
 async function transferir() {
-    const id = await getPessoaId();
-    const destinoId = document.getElementById('destinoId').value;
+    const origemId = await getPessoaId();
+    const destinoCpf = document.getElementById('destinoCpf').value;
     const valor = document.getElementById('valorTransferencia').value;
 
-    if (!valor || !destinoId) return alert('Informe valor e destino.');
+    if (!valor || !destinoCpf) return alert('Informe valor e CPF de destino.');
 
     try {
-        const res = await authFetch(`http://localhost:8080/api/contas/${id}/transferir?destinoId=${destinoId}&valor=${valor}`, {
+        // Buscar pessoas para encontrar o ID do CPF destino
+        const pessoasRes = await authFetch('http://localhost:8080/api/pessoas');
+        if (!pessoasRes.ok) throw new Error('Erro ao buscar pessoas');
+        const pessoas = await pessoasRes.json();
+        const destinoPessoa = pessoas.find(p => p.cpf === destinoCpf);
+        if (!destinoPessoa) throw new Error('CPF de destino não encontrado');
+
+        const destinoId = destinoPessoa.id;
+
+        const res = await authFetch(`http://localhost:8080/api/contas/${origemId}/transferir?destinoId=${destinoId}&valor=${valor}`, {
             method: 'POST'
         });
         if (!res.ok) throw new Error(await res.text());
@@ -112,6 +121,7 @@ async function transferir() {
         alert('Erro ao transferir: ' + err.message);
     }
 }
+
 
 async function mostrarUsuario() {
     try {

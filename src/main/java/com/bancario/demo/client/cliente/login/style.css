@@ -85,3 +85,18 @@ button:hover {
 .register-text a:hover {
     text-decoration: underline;
 }
+
+/* Mensagem fixa no canto inferior esquerdo */
+#msgContainer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #222;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0.95;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
