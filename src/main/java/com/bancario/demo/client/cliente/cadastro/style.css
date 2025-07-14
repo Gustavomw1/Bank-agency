@@ -86,8 +86,6 @@ form#cadastroForm button:hover {
     text-decoration: underline;
 }
 
-
-/* Mensagem fixa no canto inferior esquerdo */
 #msgContainer {
     position: fixed;
     bottom: 20px;

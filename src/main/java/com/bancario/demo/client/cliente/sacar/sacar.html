@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Kaiser</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Sacar - Kaiser</title>
+    <link rel="stylesheet" href="../dashboard/style.css">
 </head>
 
 <body>
@@ -15,20 +15,21 @@
     <nav class="navbar">
         <div class="logo">Kaiser</div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="../dashboard/index.html">Home</a></li>
             <li><a href="../depositar/depositar.html">Depositar</a></li>
-            <li><a href="../sacar/sacar.html">Sacar</a></li>
+            <li><a href="sacar.html">Sacar</a></li>
             <li><a href="../transferir/transferir.html">Transferir</a></li>
-            <li><a href="../historico/historico.html">Histórico</a></li>
+            <li><a href="../historico/historico.html">Transferir</a></li>
         </ul>
     </nav>
 
     <main class="main-content">
-        <h1>Bem-vindo ao seu banco</h1>
-        <p id="saldo">Saldo: R$ 0,00</p>
+        <h1>Sacar</h1>
+        <input type="number" id="saqueValor" placeholder="Valor para saque">
+        <button onclick="sacar()">Confirmar Saque</button>
     </main>
 
-    <script src="dashboard.js"></script>
+    <script src="../dashboard/dashboard.js"></script>
 </body>
 
 </html>

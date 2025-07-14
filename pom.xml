@@ -12,10 +12,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.ecommerce</groupId>
+    <groupId>com.bancario</groupId>
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ecommerce</name>
+    <name>bancario</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

@@ -18,9 +18,7 @@ public class Transacao {
     private Long id;
 
     private String tipo;
-
     private BigDecimal valor;
-
     private LocalDateTime data;
 
     @ManyToOne
