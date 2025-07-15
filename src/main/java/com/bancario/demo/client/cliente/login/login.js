@@ -28,3 +28,4 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         msg.textContent = `Erro: ${err.message}`;
     }
 });
+msg
