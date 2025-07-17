@@ -30,7 +30,4 @@ Projeto de sistema para gerenciamento de uma **agência bancária** com algumas 
 - CSS3
 - JavaScript (puro)
 
-![](images/bancario.png)
-
-
-![Tela do sistema bancário](29c30f2a-cef7-4046-8c0b-6b4c939d8e11.png)
+![Projeto](img/bancario.png)
