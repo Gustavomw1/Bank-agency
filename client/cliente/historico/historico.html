@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Kaiser</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="../../img/Captura de tela 2025-07-15 192951.png" type="image/x-icon">
+    <title>Histórico - Kaiser</title>
+    <link rel="stylesheet" href="../dashboard/style.css">
+    <link rel="shortcut icon" href="../../img/simbolo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -14,22 +14,21 @@
     </header>
 
     <nav class="navbar">
-        <div class="logo">Kaiser</div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="../dashboard/index.html">Home</a></li>
             <li><a href="../depositar/depositar.html">Depositar</a></li>
             <li><a href="../sacar/sacar.html">Sacar</a></li>
             <li><a href="../transferir/transferir.html">Transferir</a></li>
-            <li><a href="../historico/historico.html">Histórico</a></li>
+            <li><a href="historico.html">Histórico</a></li>
         </ul>
     </nav>
 
     <main class="main-content">
-        <h1>Bem-vindo ao seu banco</h1>
-        <p id="saldo">Saldo: R$ 0,00</p>
+        <h1>Histórico de Transações</h1>
+        <ul id="transacoes" class="transacoes"></ul>
     </main>
 
-    <script src="dashboard.js"></script>
+    <script src="../dashboard/dashboard.js"></script>
 </body>
 
 </html>

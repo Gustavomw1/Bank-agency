@@ -41,7 +41,6 @@ public class PessoaController {
             Pessoa logada = pessoaService.login(pessoa.getCpf(), pessoa.getPassword());
 
             String token = jwtUtil.generateToken(logada.getCpf());
-
             return ResponseEntity.ok(new AuthResponse(token));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());

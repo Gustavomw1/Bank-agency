@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Transferir - Kaiser</title>
+    <title>Depositar - Kaiser</title>
     <link rel="stylesheet" href="../dashboard/style.css">
-    <link rel="shortcut icon" href="../../img/Captura de tela 2025-07-15 192951.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/simbolo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -14,32 +14,27 @@
     </header>
 
     <nav class="navbar">
-        <div class="logo">Kaiser</div>
         <ul class="nav-links">
             <li><a href="../dashboard/index.html">Home</a></li>
-            <li><a href="../depositar/depositar.html">Depositar</a></li>
+            <li><a href="depositar.html">Depositar</a></li>
             <li><a href="../sacar/sacar.html">Sacar</a></li>
-            <li><a href="transferir.html">Transferir</a></li>
+            <li><a href="../transferir/transferir.html">Transferir</a></li>
             <li><a href="../historico/historico.html">historico</a></li>
         </ul>
     </nav>
 
     <main class="main-content">
-        <h1>Transferir</h1>
-        <input type="text" id="destinoCpf" placeholder="CPF do destinatário">
-        <input type="number" id="valorTransferencia" placeholder="Valor da transferência">
-        <button onclick="transferir()">Confirmar Transferência</button>
+        <h1>Depositar</h1>
+        <input type="number" id="depositoValor" placeholder="Valor para depósito">
+        <button onclick="depositar()">Confirmar Depósito</button>
     </main>
-
 
     <div id="msgContainer">
         <span id="msg"></span>
     </div>
 
-
     <script src="../dashboard/dashboard.js"></script>
+
 </body>
-
-
 
 </html>
