@@ -20,15 +20,7 @@ Projeto de sistema para gerenciamento de uma **agência bancária** com algumas 
 ### Back-end:
 - Spring Web
 - Spring Data JPA
-- MySQL Driver
+- PostgreSQL
 - Lombok
 - Spring Boot DevTools
 - Spring Security
-
-### Front-end:
-- HTML5
-- CSS3
-- JavaScript (puro)
-
-![Projeto](client/img/dash.png)
-![Projeto](client/img/login.png)

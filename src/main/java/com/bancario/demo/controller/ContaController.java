@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@CrossOrigin(origins = "http://localhost:5500")
 @RestController
 @RequestMapping("/api/contas")
 public class ContaController {
