@@ -24,3 +24,14 @@ Projeto de sistema para gerenciamento de uma **agência bancária** com algumas 
 - Lombok
 - Spring Boot DevTools
 - Spring Security
+
+## Rodar localmente
+
+1. Clone o repositório
+git clone https://github.com/Gustavomw1/Bank-agency.git
+
+2. Navegue até a pasta
+cd Back-agency
+
+3. Dentro da pasta digite:
+code .
