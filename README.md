@@ -25,13 +25,17 @@ Projeto de sistema para gerenciamento de uma **agência bancária** com algumas 
 - Spring Boot DevTools
 - Spring Security
 
+
 ## Rodar localmente
 
-1. Clone o repositório <br>
+1. Enre no terminal
+
+2. Clone o repositório <br>
 git clone https://github.com/Gustavomw1/Bank-agency.git
 
-2. Navegue até a pasta <br>
+3. Navegue até a pasta <br>
 cd Back-agency
 
-3. Dentro da pasta digite: <br>
+4. Dentro da pasta digite: <br>
 code .
+
