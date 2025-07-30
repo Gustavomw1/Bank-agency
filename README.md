@@ -28,7 +28,7 @@ Projeto de sistema para gerenciamento de uma **agência bancária** com algumas 
 
 ## Rodar localmente
 
-1. Enre no terminal
+1. Entre no terminal
 
 2. Clone o repositório <br>
 git clone https://github.com/Gustavomw1/Bank-agency.git
