@@ -27,11 +27,11 @@ Projeto de sistema para gerenciamento de uma **agência bancária** com algumas 
 
 ## Rodar localmente
 
-1. Clone o repositório
+1. Clone o repositório <br>
 git clone https://github.com/Gustavomw1/Bank-agency.git
 
-2. Navegue até a pasta
+2. Navegue até a pasta <br>
 cd Back-agency
 
-3. Dentro da pasta digite:
+3. Dentro da pasta digite: <br>
 code .
